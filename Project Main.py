@@ -32,7 +32,6 @@ turtle.register_shape(log.image)
 #* initialize
 moveAmount = 16 #! currently for development only
 player = turtle.Turtle()
-<<<<<<< Updated upstream
 draw = turtle.Turtle()
 draw.speed(0)
 draw.up()
@@ -55,19 +54,6 @@ while i<blockHeight:
 
 
 #* functions
-=======
-dirt = turtle.turtles
-'''
-xcor = player.xcor()
-ycor = player.ycor() # need to account for new coords once moved
-rightx = xcor + 10
-leftx = xcor - 10
-upy = ycor + 10
-downy = ycor - 10
-'''
-#functions
-#movement
->>>>>>> Stashed changes
 def up():
     xcor = player.xcor()
     ycor = player.ycor()
