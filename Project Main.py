@@ -1,3 +1,4 @@
+
 #* import
 import turtle
 screen = turtle.Screen()
@@ -9,7 +10,10 @@ blockHeight = height/64
 blockWidth = width/64
 print(blockHeight)#! print those values of how many blocks can fit widthwards and heightwards
 print(blockWidth)
+global blocks,xblocks,yblocks
 blocks = []
+xblocks = []
+yblocks = []
 #* other
 class block:
     def __init__(self, name, type, image, xwidth, ywidth):
@@ -25,10 +29,12 @@ grass = block('grass','solid','grass.gif',64,64)
 dirt = block('dirt','solid','dirt.gif',64,64)
 stone = block('stone','solid','stone.gif',64,64)
 log = block('log','solid','wood.gif',64,64)
+plank = block('plank','solid','planks.gif',64,64)
 turtle.register_shape(grass.image)
 turtle.register_shape(dirt.image)
 turtle.register_shape(stone.image)
 turtle.register_shape(log.image)
+turtle.register_shape(plank.image)
 #* initialize
 moveAmount = 16 #! currently for development only
 player = turtle.Turtle()
@@ -79,19 +85,23 @@ currentBlock = None
 def slotOne():
     print("slot 1")
     global currentBlock
-    currentBlock = grass.image
+    currentBlock = grass
 def slotTwo():
     print("slot 2")
     global currentBlock
-    currentBlock = dirt.image
+    currentBlock = dirt
 def slotThree():
     print("slot 3")
     global currentBlock
-    currentBlock = stone.image
+    currentBlock = stone
 def slotFour():
     print("slot 4")
     global currentBlock
-    currentBlock = log.image
+    currentBlock = log
+def slotFive():
+    print('slot 5')
+    global currentBlock
+    currentBlock = plank
 def gotoBreakBlock(x,y):
     breakBlock(x,y,blocks)
 def gotoPlaceBlock(x,y):
@@ -110,6 +120,7 @@ def breakBlock(x,y,blocks):
     y += 1
     print(y)
     print(ySubtr)
+
 def placeBlock(x,y,currentBlock):
     print('place')
     xSubtr = x%64
@@ -129,10 +140,10 @@ def placeBlock(x,y,currentBlock):
     currentTurtle.hideturtle()
     currentTurtle.up()
     currentTurtle.goto((x*64)-32,(y*64)-32)
-    currentTurtle.shape(currentBlock)
+    currentTurtle.shape(currentBlock.image)
     print(currentBlock)
     currentTurtle.showturtle()
-    blocks.append(currentTurtle)
+    blocks.append((currentTurtle,x,y))
 #* call functions
 screen.onscreenclick(gotoBreakBlock,3)
 screen.onscreenclick(gotoPlaceBlock,1)
@@ -148,6 +159,7 @@ screen.onkeypress(slotOne,'1')
 screen.onkeypress(slotTwo,'2')
 screen.onkeypress(slotThree,'3')
 screen.onkeypress(slotFour,'4')
+screen.onkeypress(slotFive,'5')
 
 screen.listen()
 screen.mainloop()
