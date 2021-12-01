@@ -107,6 +107,21 @@ def gotoBreakBlock(x,y):
     breakBlock(x,y,blocks)
 def gotoPlaceBlock(x,y):
     placeBlock(x,y,currentBlock)
+def searchBlocks(blocks,x,y):
+    ifBlock = None
+    searchQueryData = None
+    if searchQueryData != None:
+        ifBlock = True
+        blockTurtle = searchQueryData[0]
+        x = searchQueryData[1]
+        y = searchQueryData[2]
+        return (ifBlock,blockTurtle,x,y)
+    elif searchQueryData == None:
+        ifBlock = False
+        blockTurtle = None
+        x = None
+        y = None
+        return (ifBlock,blockTurtle,x,y)
 def breakBlock(x,y,blocks):
     print('break')
     xSubtr = x%64
@@ -136,16 +151,20 @@ def placeBlock(x,y,currentBlock):
     y += 1
     print(y)
     print(ySubtr)
-    currentTurtle = turtle.Turtle()
-    currentTurtle.speed(0)
-    currentTurtle.hideturtle()
-    currentTurtle.up()
-    currentTurtle.goto((x*64)-32,(y*64)-32)
-    currentTurtle.shape(currentBlock.image)
-    print(currentBlock)
-    currentTurtle.showturtle()
-    blocks.append((currentTurtle,x,y))
-    print(blocks)
+    searchOutput = searchBlocks(blocks,x,y)
+    if not searchOutput[0]:
+        currentTurtle = turtle.Turtle()
+        currentTurtle.speed(0)
+        currentTurtle.hideturtle()
+        currentTurtle.up()
+        currentTurtle.goto((x*64)-32,(y*64)-32)
+        currentTurtle.shape(currentBlock.image)
+        print(currentBlock)
+        currentTurtle.showturtle()
+        blocks.append((currentTurtle,x,y))
+        print(blocks)
+    else:
+        print('there is already a block in that location')
 #* call functions
 screen.onscreenclick(gotoBreakBlock,3)
 screen.onscreenclick(gotoPlaceBlock,1)
