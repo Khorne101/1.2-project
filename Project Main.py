@@ -2,6 +2,7 @@
 #* import
 import turtle
 screen = turtle.Screen()
+screen.bgcolor("#AAFFEE")
 width=768
 height=512
 screen.setup(width, height) #! setup the screen height and width to multiples of 64 then figure out how many blocks can fit widthwards and heightwards
