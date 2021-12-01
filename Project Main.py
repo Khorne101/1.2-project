@@ -145,6 +145,7 @@ def placeBlock(x,y,currentBlock):
     print(currentBlock)
     currentTurtle.showturtle()
     blocks.append((currentTurtle,x,y))
+    print(blocks)
 #* call functions
 screen.onscreenclick(gotoBreakBlock,3)
 screen.onscreenclick(gotoPlaceBlock,1)
