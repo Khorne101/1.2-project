@@ -146,8 +146,11 @@ def breakBlock(x,y,blocks):
     print(ySubtr)
     searchOutput = searchBlocks(blocks,x,y)
     if searchOutput[0]:
-        blocks.pop(searchOutput[4])
+        print(blocks)
+        searchOutput[1].hideturtle()
+        blocks.remove((searchOutput[1],searchOutput[2],searchOutput[3]))
         screen.update()
+        print(blocks)
     else:
         print('no block to break there')
 def placeBlock(x,y,currentBlock):
@@ -179,8 +182,8 @@ def placeBlock(x,y,currentBlock):
     else:
         print('there is already a block in that location')
 #* call functions
-screen.onscreenclick(gotoBreakBlock,3)
-screen.onscreenclick(gotoPlaceBlock,1)
+screen.onscreenclick(gotoBreakBlock,1)
+screen.onscreenclick(gotoPlaceBlock,3)
 screen.onkeypress(up,"w")
 screen.onkeypress(down,"s")
 screen.onkeypress(right,"d")
