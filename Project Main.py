@@ -107,6 +107,29 @@ def gotoBreakBlock(x,y):
     breakBlock(x,y,blocks)
 def gotoPlaceBlock(x,y):
     placeBlock(x,y,currentBlock)
+def searchBlocks(blocks,x,y):
+    ifBlock = None
+    searchQueryData = None
+    global i
+    i = 0
+    while i<len(blocks):
+        search = blocks[i]
+        if search[1] == x and search[2] == y:
+            searchQueryData = blocks[i]
+            break
+        i+=1
+    if searchQueryData != None:
+        ifBlock = True
+        blockTurtle = searchQueryData[0]
+        x = searchQueryData[1]
+        y = searchQueryData[2]
+        return (ifBlock,blockTurtle,x,y,i)
+    elif searchQueryData == None:
+        ifBlock = False
+        blockTurtle = None
+        x = None
+        y = None
+        return (ifBlock,blockTurtle,x,y,i)
 def breakBlock(x,y,blocks):
     print('break')
     xSubtr = x%64
@@ -121,7 +144,15 @@ def breakBlock(x,y,blocks):
     y += 1
     print(y)
     print(ySubtr)
-
+    searchOutput = searchBlocks(blocks,x,y)
+    if searchOutput[0]:
+        print(blocks)
+        searchOutput[1].hideturtle()
+        blocks.remove((searchOutput[1],searchOutput[2],searchOutput[3]))
+        screen.update()
+        print(blocks)
+    else:
+        print('no block to break there')
 def placeBlock(x,y,currentBlock):
     print('place')
     xSubtr = x%64
@@ -136,18 +167,23 @@ def placeBlock(x,y,currentBlock):
     y += 1
     print(y)
     print(ySubtr)
-    currentTurtle = turtle.Turtle()
-    currentTurtle.speed(0)
-    currentTurtle.hideturtle()
-    currentTurtle.up()
-    currentTurtle.goto((x*64)-32,(y*64)-32)
-    currentTurtle.shape(currentBlock.image)
-    print(currentBlock)
-    currentTurtle.showturtle()
-    blocks.append((currentTurtle,x,y))
+    searchOutput = searchBlocks(blocks,x,y)
+    if not searchOutput[0]:
+        currentTurtle = turtle.Turtle()
+        currentTurtle.speed(0)
+        currentTurtle.hideturtle()
+        currentTurtle.up()
+        currentTurtle.goto((x*64)-32,(y*64)-32)
+        currentTurtle.shape(currentBlock.image)
+        print(currentBlock)
+        currentTurtle.showturtle()
+        blocks.append((currentTurtle,x,y))
+        print(blocks)
+    else:
+        print('there is already a block in that location')
 #* call functions
-screen.onscreenclick(gotoBreakBlock,3)
-screen.onscreenclick(gotoPlaceBlock,1)
+screen.onscreenclick(gotoBreakBlock,1)
+screen.onscreenclick(gotoPlaceBlock,3)
 screen.onkeypress(up,"w")
 screen.onkeypress(down,"s")
 screen.onkeypress(right,"d")
