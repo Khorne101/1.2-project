@@ -11,7 +11,7 @@ blockHeight = height/64
 blockWidth = width/64
 print(blockHeight)#! print those values of how many blocks can fit widthwards and heightwards
 print(blockWidth)
-global blocks,xblocks,yblocks
+global blocks
 blocks = []
 #* other
 class block:
@@ -68,8 +68,6 @@ while i<blockHeight:
     draw.down()
     draw.goto(blockWidth*64,i*64)
     draw.up()
-
-
 #* functions
 def up():
     xcor = player.xcor()
@@ -212,8 +210,5 @@ screen.onkeypress(slotTwo,'2')
 screen.onkeypress(slotThree,'3')
 screen.onkeypress(slotFour,'4')
 screen.onkeypress(slotFive,'5')
-
 screen.listen()
 screen.mainloop()
-
-
