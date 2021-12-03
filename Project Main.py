@@ -13,8 +13,6 @@ print(blockHeight)#! print those values of how many blocks can fit widthwards an
 print(blockWidth)
 global blocks,xblocks,yblocks
 blocks = []
-xblocks = []
-yblocks = []
 #* other
 class block:
     def __init__(self, name, type, image, xwidth, ywidth):
@@ -37,6 +35,7 @@ turtle.register_shape(stone.image)
 turtle.register_shape(log.image)
 turtle.register_shape(plank.image)
 turtle.register_shape('none.gif')
+turtle.register_shape('Grass..gif')
 turtle.register_shape('Dirt..gif')
 turtle.register_shape('Stone..gif')
 turtle.register_shape('Plank.gif')
@@ -50,7 +49,8 @@ draw.speed(0)
 draw.up()
 draw.hideturtle()
 displayBlock.hideturtle()
-displayBlock.goto(32,-4)
+displayBlock.up()
+displayBlock.goto(32,-8)
 displayBlock.shape('none.gif')
 displayBlock.showturtle()
 #* create devlopment grid
@@ -97,22 +97,27 @@ def slotOne():
     print("slot 1")
     global currentBlock
     currentBlock = grass
+    displayBlock.shape('Grass..gif')
 def slotTwo():
     print("slot 2")
     global currentBlock
     currentBlock = dirt
+    displayBlock.shape('Dirt..gif')
 def slotThree():
     print("slot 3")
     global currentBlock
     currentBlock = stone
+    displayBlock.shape('Stone..gif')
 def slotFour():
     print("slot 4")
     global currentBlock
     currentBlock = log
+    displayBlock.shape('Log.gif')
 def slotFive():
     print('slot 5')
     global currentBlock
     currentBlock = plank
+    displayBlock.shape('Plank.gif')
 def gotoBreakBlock(x,y):
     breakBlock(x,y,blocks)
 def gotoPlaceBlock(x,y):
