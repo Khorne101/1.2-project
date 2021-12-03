@@ -36,13 +36,23 @@ turtle.register_shape(dirt.image)
 turtle.register_shape(stone.image)
 turtle.register_shape(log.image)
 turtle.register_shape(plank.image)
+turtle.register_shape('none.gif')
+turtle.register_shape('Dirt..gif')
+turtle.register_shape('Stone..gif')
+turtle.register_shape('Plank.gif')
+turtle.register_shape('Log.gif')
 #* initialize
-moveAmount = 16 #! currently for development only
+moveAmount = 4 #! currently for development only
 player = turtle.Turtle()
+displayBlock = turtle.Turtle()
 draw = turtle.Turtle()
 draw.speed(0)
 draw.up()
 draw.hideturtle()
+displayBlock.hideturtle()
+displayBlock.goto(32,-4)
+displayBlock.shape('none.gif')
+displayBlock.showturtle()
 #* create devlopment grid
 i = -1
 while i<blockWidth:
