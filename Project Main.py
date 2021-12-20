@@ -1,8 +1,8 @@
 
 #* import
 import turtle
+import time
 screen = turtle.Screen()
-screen.bgcolor("#AAFFEE")
 width=768
 height=512
 screen.setup(width, height) #! setup the screen height and width to multiples of 64 then figure out how many blocks can fit widthwards and heightwards
@@ -40,8 +40,10 @@ turtle.register_shape('Dirt..gif')
 turtle.register_shape('Stone..gif')
 turtle.register_shape('Plank.gif')
 turtle.register_shape('Log.gif')
+#* loading screen
+screen.bgpic('Molang Logo.png')
+screen.bgcolor('#AAFFEE')
 #* initialize
-moveAmount = 4 #! currently for development only
 player = turtle.Turtle()
 displayBlock = turtle.Turtle()
 draw = turtle.Turtle()
@@ -51,23 +53,26 @@ draw.hideturtle()
 displayBlock.hideturtle()
 displayBlock.up()
 displayBlock.goto(32,-8)
-displayBlock.shape('none.gif')
-displayBlock.showturtle()
-#* create devlopment grid
-i = -1
-while i<blockWidth:
-    i += 1
-    draw.goto(i*64,0)
-    draw.down()
-    draw.goto(i*64,blockHeight*64)
-    draw.up()
-i = -1
-while i<blockHeight:
-    i += 1
-    draw.goto(0,i*64)
-    draw.down()
-    draw.goto(blockWidth*64,i*64)
-    draw.up()
+def runCode():
+    screen.bgpic('nopic')
+    moveAmount = 4 #! currently for development only
+    displayBlock.shape('none.gif')
+    displayBlock.showturtle()
+    #* create devlopment grid
+    i = -1
+    while i<blockWidth:
+        i += 1
+        draw.goto(i*64,0)
+        draw.down()
+        draw.goto(i*64,blockHeight*64)
+        draw.up()
+    i = -1
+    while i<blockHeight:
+        i += 1
+        draw.goto(0,i*64)
+        draw.down()
+        draw.goto(blockWidth*64,i*64)
+        draw.up()
 #* functions
 def up():
     xcor = player.xcor()
@@ -195,6 +200,7 @@ def placeBlock(x,y,currentBlock):
     else:
         print('there is already a block in that location')
 #* call functions
+screen.ontimer(runCode,5000)
 screen.onscreenclick(gotoBreakBlock,1)
 screen.onscreenclick(gotoPlaceBlock,3)
 screen.onkeypress(up,"w")
